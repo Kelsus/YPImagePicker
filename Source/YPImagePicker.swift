@@ -159,6 +159,19 @@ override open func viewDidLoad() {
         loadingView.fillContainer()
         loadingView.alpha = 0
     }
+    
+    public func previewVideoPause() {
+        picker.libraryVC?.pausePlayer()
+    }
+    
+    public func previewVideoPlay() {
+        picker.libraryVC?.playPlayer()
+    }
+    
+    public func previewVideoReset() {
+        picker.libraryVC?.resetPlayer()
+    }
+
 }
 
 extension YPImagePicker: ImagePickerDelegate {
