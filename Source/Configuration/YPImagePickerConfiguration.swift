@@ -94,6 +94,9 @@ public struct YPImagePickerConfiguration {
     /// Defines if the navigation bar cancel button should be hidden when showing the picker. Default is false
     public var hidesCancelButton = false
     
+    /// Defines if the navigation bar cancel button should be an image when showing the picker. Default is false
+    public var useImageForCancelButton = false
+    
     /// Defines if the status bar should be hidden when showing the picker. Default is true
     public var hidesStatusBar = true
     

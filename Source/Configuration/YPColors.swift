@@ -49,6 +49,12 @@ public struct YPColors {
 
     /// A color for for bottom buttons not selected text.
     public var bottomMenuItemUnselectedTextColor: UIColor = .ypSecondaryLabel
+    
+    /// A color for line between asset selected and assets list
+    public var lineBetweenAssetSelectedAndAssetsList: UIColor = .offWhiteOrBlack
+    
+    /// A color for line between asset selected and assets list
+    public var cancelImageTintColor: UIColor = .offWhiteOrBlack
 
     // MARK: - Trimmer
     
