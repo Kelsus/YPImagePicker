@@ -281,10 +281,21 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         switch mode {
         case .library:
             setTitleViewWithTitle(aTitle: libraryVC?.title ?? "")
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
-                                                                style: .done,
-                                                                target: self,
-                                                                action: #selector(done))
+            if YPConfig.useImageForNextButton {
+                var image = YPConfig.icons.nextButtonIcon
+                if #available(iOS 13.0, *) {
+                    image = image.withTintColor(YPConfig.colors.tintColor)
+                }
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: image,
+                                                               style: .plain,
+                                                               target: self,
+                                                               action: #selector(done))
+            } else {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
+                                                                    style: .done,
+                                                                    target: self,
+                                                                    action: #selector(done))
+            }
             navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
 
             // Disable Next Button until minNumberOfItems is reached.
