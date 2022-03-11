@@ -72,8 +72,8 @@ class YPAssetViewContainer: UIView {
         spinnerView.fillContainer()
         curtain.fillContainer()
         
-        spinner.startAnimating()
-        spinnerView.backgroundColor = UIColor.ypLabel.withAlphaComponent(0.3)
+//        spinner.startAnimating()
+//        spinnerView.backgroundColor = UIColor.ypLabel.withAlphaComponent(0.3)
         curtain.backgroundColor = UIColor.ypLabel.withAlphaComponent(0.7)
         curtain.alpha = 0
         
@@ -168,6 +168,15 @@ extension YPAssetViewContainer: YPAssetZoomableViewDelegate {
         UIView.animate(withDuration: 0.3) {
             itemOverlay.alpha = 0
         }
+    }
+    
+    public func startAnimation() {
+        spinner.startAnimating()
+        spinnerView.alpha = 1
+    }
+    public func stopAnimation() {
+        spinner.stopAnimating()
+        spinnerView.alpha = 0
     }
 }
 

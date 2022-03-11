@@ -316,7 +316,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
     func changeAsset(_ asset: PHAsset) {
         latestImageTapped = asset.localIdentifier
-        delegate?.libraryViewStartedLoadingImage()
+//        delegate?.libraryViewStartedLoadingImage()
         
         let completion = { (isLowResIntermediaryImage: Bool) in
             self.v.hideOverlayView()

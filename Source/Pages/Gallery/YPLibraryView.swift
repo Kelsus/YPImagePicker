@@ -111,21 +111,24 @@ extension YPLibraryView {
             Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
                 if self.shouldShowLoader == true {
                     UIView.animate(withDuration: 0.2) {
-                        self.assetViewContainer.spinnerView.alpha = 1
+//                        self.assetViewContainer.spinnerView.alpha = 1
+                        self.assetViewContainer.startAnimation()
                     }
                 }
             }
         } else {
             // Fallback on earlier versions
             UIView.animate(withDuration: 0.2) {
-                self.assetViewContainer.spinnerView.alpha = 1
+//                self.assetViewContainer.spinnerView.alpha = 1
+                self.assetViewContainer.startAnimation()
             }
         }
     }
     
     func hideLoader() {
         shouldShowLoader = false
-        assetViewContainer.spinnerView.alpha = 0
+//        assetViewContainer.spinnerView.alpha = 0
+        self.assetViewContainer.stopAnimation()
     }
     
     func updateProgress(_ progress: Float) {
