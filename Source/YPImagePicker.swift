@@ -171,6 +171,10 @@ override open func viewDidLoad() {
     public func previewVideoReset() {
         picker.libraryVC?.resetPlayer()
     }
+    
+    public func refreshGalleryList() {
+        picker.libraryVC?.refreshMediaRequest()
+    }
 
 }
 
