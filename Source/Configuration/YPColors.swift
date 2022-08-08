@@ -55,6 +55,10 @@ public struct YPColors {
 
     /// The default color of all navigation bars except album's.
     public var defaultNavigationBarColor: UIColor = .offWhiteOrBlack
+    
+    /// A color for line between asset selected and assets list
+    public var cancelImageTintColor: UIColor = .offWhiteOrBlack
+
 
     // MARK: - Trimmer
     
