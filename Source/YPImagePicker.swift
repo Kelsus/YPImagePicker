@@ -168,7 +168,7 @@ open class YPImagePicker: UINavigationController {
         loadingView.alpha = 0
     }
     
-    func stopAll() {
+    public func stopAll() {
         picker.stopAll()
     }
 }
