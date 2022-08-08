@@ -57,8 +57,7 @@ public struct YPColors {
     public var defaultNavigationBarColor: UIColor = .offWhiteOrBlack
     
     /// A color for line between asset selected and assets list
-    public var cancelImageTintColor: UIColor = .offWhiteOrBlack
-
+    public var separateLineColor: UIColor = .ypSystemBackground
 
     // MARK: - Trimmer
     

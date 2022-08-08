@@ -53,7 +53,7 @@ internal final class YPLibraryView: UIView {
 
     private let line: UIView = {
         let v = UIView()
-        v.backgroundColor = .ypSystemBackground
+        v.backgroundColor = YPConfig.colors.separateLineColor
         return v
     }()
     /// When video is processing this bar appears
