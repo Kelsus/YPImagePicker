@@ -28,5 +28,6 @@ public struct YPIcons {
     public var playImage: UIImage = imageFromBundle("yp_play")
     public var removeImage: UIImage = imageFromBundle("yp_remove")
     public var cancelButtonIcon: UIImage = imageFromBundle("yp_arrow_left")
+    public var nextButtonIcon: UIImage = imageFromBundle("yp_play")
 
 }
