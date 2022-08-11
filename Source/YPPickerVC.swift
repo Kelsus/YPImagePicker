@@ -350,6 +350,10 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         videoVC?.stopCamera()
         cameraVC?.stopCamera()
     }
+    
+    func pausePlayer() {
+        libraryVC?.pausePlayer()
+    }
 }
 
 extension YPPickerVC: YPLibraryViewDelegate {

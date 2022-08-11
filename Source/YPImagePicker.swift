@@ -171,6 +171,10 @@ open class YPImagePicker: UINavigationController {
     public func stopAll() {
         picker.stopAll()
     }
+    
+    public func pausePlayer() {
+        picker.pausePlayer()
+    }
 }
 
 extension YPImagePicker: YPPickerVCDelegate {
