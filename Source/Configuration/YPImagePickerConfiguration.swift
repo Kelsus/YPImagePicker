@@ -202,6 +202,9 @@ public struct YPConfigLibrary {
 	/// Minimum width, to prevent selectiong too high images. Have sense if onlySquare is true and the image is portrait.
     public var minWidthForItem: CGFloat?
     
+    /// Automatic zoom after user selects photo.
+    public var autoZoomIn = false
+    
     /// Choose what media types are available in the library. Defaults to `.photo`.
     /// If you define custom options PHFetchOptions var, than this will not work.
     public var mediaType = YPlibraryMediaType.photo

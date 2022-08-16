@@ -39,9 +39,9 @@ final class YPAssetZoomableView: UIScrollView {
     public func fitImage(_ fit: Bool, animated isAnimated: Bool = false) {
         squaredZoomScale = calculateSquaredZoomScale()
         if fit {
-            setZoomScale(squaredZoomScale, animated: isAnimated)
+            self.setZoomScale(self.squaredZoomScale, animated: isAnimated)
         } else {
-            setZoomScale(1, animated: isAnimated)
+            self.setZoomScale(1, animated: isAnimated)
         }
     }
     

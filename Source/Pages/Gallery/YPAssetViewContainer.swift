@@ -102,9 +102,13 @@ final class YPAssetViewContainer: UIView {
     // MARK: - Square button
 
     @objc public func squareCropButtonTapped() {
+        execPhotoZoom()
+    }
+    
+    public func execPhotoZoom(animated: Bool = true) {
         let z = zoomableView.zoomScale
         shouldCropToSquare = (z >= 1 && z < zoomableView.squaredZoomScale)
-        zoomableView.fitImage(shouldCropToSquare, animated: true)
+        zoomableView.fitImage(shouldCropToSquare, animated: animated)
     }
 
     /// Update only UI of square crop button.
@@ -136,6 +140,11 @@ final class YPAssetViewContainer: UIView {
         isMultipleSelectionEnabled = on
         let image = on ? YPConfig.icons.multipleSelectionOnIcon : YPConfig.icons.multipleSelectionOffIcon
         multipleSelectionButton.setImage(image, for: .normal)
+        
+        YPImagePickerConfiguration.shared.library.onlySquare = on
+        if YPConfig.library.autoZoomIn {
+            execPhotoZoom(animated: false)
+        }
         updateSquareCropButtonState()
     }
 }

@@ -295,6 +295,10 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
                 self.v.hideLoader()
                 self.delegate?.libraryViewFinishedLoading()
             }
+
+            if YPConfig.library.maxNumberOfItems > 1 && YPImagePickerConfiguration.shared.library.onlySquare {
+                self.v.assetViewContainer.execPhotoZoom(animated: false)
+            }
         }
         
         let updateCropInfo = {
