@@ -140,11 +140,6 @@ final class YPAssetViewContainer: UIView {
         isMultipleSelectionEnabled = on
         let image = on ? YPConfig.icons.multipleSelectionOnIcon : YPConfig.icons.multipleSelectionOffIcon
         multipleSelectionButton.setImage(image, for: .normal)
-        
-        YPImagePickerConfiguration.shared.library.onlySquare = on
-        if YPConfig.library.autoZoomIn {
-            execPhotoZoom(animated: false)
-        }
         updateSquareCropButtonState()
     }
 }

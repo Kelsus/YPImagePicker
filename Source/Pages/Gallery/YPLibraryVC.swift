@@ -186,7 +186,10 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
 
         isMultipleSelectionEnabled.toggle()
-
+        YPImagePickerConfiguration.shared.library.onlySquare = isMultipleSelectionEnabled
+        if YPConfig.library.autoZoomIn {
+            v.assetViewContainer.execPhotoZoom(animated: false)
+        }
         if isMultipleSelectionEnabled {
             let needPreselectItemsAndNotSelectedAnyYet = selectedItems.isEmpty && YPConfig.library.preSelectItemOnMultipleSelection
             let shouldSelectByDelegate = delegate?.libraryViewShouldAddToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0), numSelections: selectedItems.count) ?? true
@@ -296,9 +299,7 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
                 self.delegate?.libraryViewFinishedLoading()
             }
 
-            if YPConfig.library.maxNumberOfItems > 1 && YPImagePickerConfiguration.shared.library.onlySquare {
-                self.v.assetViewContainer.execPhotoZoom(animated: false)
-            }
+            
         }
         
         let updateCropInfo = {
@@ -365,6 +366,13 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         selectedAsset.scrollViewContentOffset = v.assetZoomableView.contentOffset
         selectedAsset.scrollViewZoomScale = v.assetZoomableView.zoomScale
         selectedAsset.cropRect = v.currentCropRect()
+        if let size = selectedAsset.cropRect?.size, size.width == 1, size.height == 1 {
+            if isMultipleSelectionEnabled {
+                self.v.assetViewContainer.execPhotoZoom(animated: false)
+                selectedAsset.cropRect = v.currentCropRect()
+            }
+        }
+       
         
         // Replace
         selectedItems.remove(at: selectedAssetIndex)
