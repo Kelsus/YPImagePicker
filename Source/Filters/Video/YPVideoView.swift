@@ -110,17 +110,20 @@ extension YPVideoView {
     }
     
     public func play() {
+        print("YPImagePicker - play")
         player.play()
         showPlayImage(show: false)
         addReachEndObserver()
     }
     
     public func pause() {
+        print("YPImagePicker - pause")
         player.pause()
         showPlayImage(show: true)
     }
     
     public func stop() {
+        print("YPImagePicker - stop")
         player.pause()
         player.seek(to: CMTime.zero)
         showPlayImage(show: true)
