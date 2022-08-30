@@ -70,7 +70,10 @@ extension YPLibraryVC {
                 v.collectionView.deselectItem(at: indexPath, animated: false)
                 v.collectionView.selectItem(at: previouslySelectedIndexPath, animated: false, scrollPosition: [])
                 currentlySelectedIndex = previouslySelectedIndexPath.row
-                changeAsset(mediaManager.getAsset(at: previouslySelectedIndexPath.row))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.changeAsset(self.mediaManager.getAsset(at: previouslySelectedIndexPath.row))
+                }
+
             }
 			
             checkLimit()
