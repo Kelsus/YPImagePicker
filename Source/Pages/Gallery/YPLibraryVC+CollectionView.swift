@@ -70,10 +70,8 @@ extension YPLibraryVC {
                 v.collectionView.deselectItem(at: indexPath, animated: false)
                 v.collectionView.selectItem(at: previouslySelectedIndexPath, animated: false, scrollPosition: [])
                 currentlySelectedIndex = previouslySelectedIndexPath.row
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.changeAsset(self.mediaManager.getAsset(at: previouslySelectedIndexPath.row))
-                }
-
+                self.changeAsset(self.mediaManager.getAsset(at: self.currentlySelectedIndex), newInsert: true)
+                
             }
 			
             checkLimit()
@@ -171,27 +169,34 @@ extension YPLibraryVC: UICollectionViewDelegate {
         let previouslySelectedIndexPath = IndexPath(row: currentlySelectedIndex, section: 0)
         currentlySelectedIndex = indexPath.row
 
-        changeAsset(mediaManager.getAsset(at: indexPath.row))
-        panGestureHelper.resetToOriginalState()
         
-        // Only scroll cell to top if preview is hidden.
-        if !panGestureHelper.isImageShown {
-            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        let updateZoomView: (Bool) -> () = { [self] (newInsert: Bool) in
+            changeAsset(mediaManager.getAsset(at: indexPath.row), newInsert: newInsert)
+            panGestureHelper.resetToOriginalState()
+            
+            // Only scroll cell to top if preview is hidden.
+            if !panGestureHelper.isImageShown {
+                collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            }
+            v.refreshImageCurtainAlpha()
         }
-        v.refreshImageCurtainAlpha()
+        
             
         if isMultipleSelectionEnabled {
             let cellIsInTheSelectionPool = isInSelectionPool(indexPath: indexPath)
             let cellIsCurrentlySelected = previouslySelectedIndexPath.row == currentlySelectedIndex
             if cellIsInTheSelectionPool {
+                updateZoomView(false)
                 if cellIsCurrentlySelected {
                     deselect(indexPath: indexPath)
                 }
             } else if isLimitExceeded == false {
+                updateZoomView(true)
                 addToSelection(indexPath: indexPath)
             }
             collectionView.reloadItems(at: [indexPath])
-            collectionView.reloadItems(at: [previouslySelectedIndexPath])
+//            collectionView.reloadItems(at: [previouslySelectedIndexPath])
+            updateCropInfo()
         } else {
             selectedItems.removeAll()
             addToSelection(indexPath: indexPath)
@@ -203,6 +208,7 @@ extension YPLibraryVC: UICollectionViewDelegate {
             if let previousCell = collectionView.cellForItem(at: previouslySelectedIndexPath) as? YPLibraryViewCell {
                 previousCell.isSelected = false
             }
+            updateZoomView(false)
         }
     }
     

@@ -187,9 +187,7 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
 
         isMultipleSelectionEnabled.toggle()
         YPImagePickerConfiguration.shared.library.onlySquare = isMultipleSelectionEnabled
-        if YPConfig.library.autoZoomIn {
-            v.assetViewContainer.execPhotoZoom(animated: false)
-        }
+        v.assetViewContainer.execPhotoZoom(animated: false, forceFit: isMultipleSelectionEnabled)
         if isMultipleSelectionEnabled {
             let needPreselectItemsAndNotSelectedAnyYet = selectedItems.isEmpty && YPConfig.library.preSelectItemOnMultipleSelection
             let shouldSelectByDelegate = delegate?.libraryViewShouldAddToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0), numSelections: selectedItems.count) ?? true
@@ -282,7 +280,7 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
     }
     
-    func changeAsset(_ asset: PHAsset?) {
+    func changeAsset(_ asset: PHAsset?, newInsert: Bool  = false) {
         guard let asset = asset else {
             print("No asset to change.")
             return
@@ -293,6 +291,10 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         let completion = { (isLowResIntermediaryImage: Bool) in
             self.v.hideOverlayView()
             self.v.assetViewContainer.updateSquareCropButtonState()
+            if newInsert && self.isMultipleSelectionEnabled {
+                self.v.assetViewContainer.execPhotoZoom(animated: false, forceFit: true)
+               
+            }
             self.updateCropInfo()
             if !isLowResIntermediaryImage {
                 self.v.hideLoader()
@@ -366,14 +368,6 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         selectedAsset.scrollViewContentOffset = v.assetZoomableView.contentOffset
         selectedAsset.scrollViewZoomScale = v.assetZoomableView.zoomScale
         selectedAsset.cropRect = v.currentCropRect()
-        if let size = selectedAsset.cropRect?.size, size.width == 1, size.height == 1 {
-            if isMultipleSelectionEnabled {
-                self.v.assetViewContainer.execPhotoZoom(animated: false)
-                selectedAsset.cropRect = v.currentCropRect()
-            }
-        }
-       
-        
         // Replace
         selectedItems.remove(at: selectedAssetIndex)
         selectedItems.insert(selectedAsset, at: selectedAssetIndex)

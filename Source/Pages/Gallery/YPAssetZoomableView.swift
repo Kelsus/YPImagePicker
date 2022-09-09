@@ -90,6 +90,9 @@ final class YPAssetZoomableView: UIScrollView {
         mediaManager.imageManager?.fetchPlayerItem(for: video) { [weak self] playerItem in
             guard let strongSelf = self else { return }
             guard strongSelf.currentAsset != video else { completion() ; return }
+            if !strongSelf.isVideoMode {
+                return
+            }
             strongSelf.currentAsset = video
 
             strongSelf.videoView.loadVideo(playerItem)
