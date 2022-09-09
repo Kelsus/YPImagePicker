@@ -195,7 +195,7 @@ extension YPLibraryVC: UICollectionViewDelegate {
                 addToSelection(indexPath: indexPath)
             }
             collectionView.reloadItems(at: [indexPath])
-//            collectionView.reloadItems(at: [previouslySelectedIndexPath])
+            collectionView.reloadItems(at: [previouslySelectedIndexPath])
             updateCropInfo()
         } else {
             selectedItems.removeAll()
