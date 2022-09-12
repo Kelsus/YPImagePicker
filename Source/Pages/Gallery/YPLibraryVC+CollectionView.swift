@@ -166,11 +166,10 @@ extension YPLibraryVC: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if isLimitExceeded {
-            return
-        }
         let previouslySelectedIndexPath = IndexPath(row: currentlySelectedIndex, section: 0)
-        currentlySelectedIndex = indexPath.row
+        if !isLimitExceeded {
+            currentlySelectedIndex = indexPath.row
+        }
 
         
         let updateZoomView: (Bool) -> () = { [self] (newInsert: Bool) in
