@@ -186,8 +186,11 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
 
         isMultipleSelectionEnabled.toggle()
-        YPImagePickerConfiguration.shared.library.onlySquare = isMultipleSelectionEnabled
-//        v.assetViewContainer.execPhotoZoom(animated: false, forceFit: isMultipleSelectionEnabled)
+//        YPImagePickerConfiguration.shared.library.onlySquare = isMultipleSelectionEnabled
+        if YPImagePickerConfiguration.shared.library.onlySquare {
+            v.assetViewContainer.execPhotoZoom(animated: false, forceFit: isMultipleSelectionEnabled)
+        }
+       
         if isMultipleSelectionEnabled {
             let needPreselectItemsAndNotSelectedAnyYet = selectedItems.isEmpty && YPConfig.library.preSelectItemOnMultipleSelection
             let shouldSelectByDelegate = delegate?.libraryViewShouldAddToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0), numSelections: selectedItems.count) ?? true
@@ -292,7 +295,10 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
             self.v.hideOverlayView()
             self.v.assetViewContainer.updateSquareCropButtonState()
             if newInsert && self.isMultipleSelectionEnabled {
-//                self.v.assetViewContainer.execPhotoZoom(animated: false, forceFit: true)
+                if YPImagePickerConfiguration.shared.library.onlySquare {
+                    self.v.assetViewContainer.execPhotoZoom(animated: false, forceFit: true)
+                }
+                
                
             }
             self.updateCropInfo()

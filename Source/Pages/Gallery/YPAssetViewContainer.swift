@@ -115,7 +115,7 @@ final class YPAssetViewContainer: UIView {
     public func updateSquareCropButtonState() {
         guard !isMultipleSelectionEnabled else {
             // If multiple selection enabled, the squareCropButton is not visible
-//            squareCropButton.isHidden = true
+            squareCropButton.isHidden = YPImagePickerConfiguration.shared.library.onlySquare
             return
         }
         guard !onlySquare else {
