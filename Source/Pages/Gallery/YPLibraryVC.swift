@@ -188,7 +188,7 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         isMultipleSelectionEnabled.toggle()
 //        YPImagePickerConfiguration.shared.library.onlySquare = isMultipleSelectionEnabled
         if YPImagePickerConfiguration.shared.library.onlySquare {
-            v.assetViewContainer.execPhotoZoom(animated: false, forceFit: isMultipleSelectionEnabled)
+            v.assetViewContainer.execPhotoZoom(animated: false, forceFit: true)
         }
        
         if isMultipleSelectionEnabled {
@@ -294,13 +294,13 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         let completion = { (isLowResIntermediaryImage: Bool) in
             self.v.hideOverlayView()
             self.v.assetViewContainer.updateSquareCropButtonState()
-            if newInsert && self.isMultipleSelectionEnabled {
+//            if newInsert && self.isMultipleSelectionEnabled {
                 if YPImagePickerConfiguration.shared.library.onlySquare {
                     self.v.assetViewContainer.execPhotoZoom(animated: false, forceFit: true)
                 }
                 
                
-            }
+//            }
             self.updateCropInfo()
             if !isLowResIntermediaryImage {
                 self.v.hideLoader()

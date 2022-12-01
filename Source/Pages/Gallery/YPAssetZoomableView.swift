@@ -234,9 +234,9 @@ fileprivate extension YPAssetZoomableView {
         let h = image.size.height
         
         if w > h { // Landscape
-            squareZoomScale = (w / h)
+            squareZoomScale = YPConfig.library.cropLanscape * (w / h)
         } else if h > w { // Portrait
-            squareZoomScale = (h / w)
+            squareZoomScale = YPConfig.library.cropPortrait * (h / w)
         }
         
         return squareZoomScale

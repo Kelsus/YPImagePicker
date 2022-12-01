@@ -196,6 +196,10 @@ public struct YPConfigLibrary {
     /// Set this to true if you want to force the library output to be a squared image. Defaults to false.
     public var onlySquare = false
     
+    public var cropLanscape: CGFloat = 1
+    
+    public var cropPortrait: CGFloat = 1
+    
     /// Sets the cropping style to square or not. Ignored if `onlySquare` is true. Defaults to true.
     public var isSquareByDefault = true
     
