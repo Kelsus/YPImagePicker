@@ -243,7 +243,7 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         
         if mediaManager.hasResultItems,
         let firstAsset = mediaManager.getAsset(at: 0) {
-            changeAsset(firstAsset)
+            changeAsset(firstAsset, newInsert: true)
             v.collectionView.reloadData()
             v.collectionView.selectItem(at: IndexPath(row: 0, section: 0),
                                         animated: false,
@@ -294,13 +294,13 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         let completion = { (isLowResIntermediaryImage: Bool) in
             self.v.hideOverlayView()
             self.v.assetViewContainer.updateSquareCropButtonState()
-//            if newInsert && self.isMultipleSelectionEnabled {
-                if YPImagePickerConfiguration.shared.library.onlySquare {
+            if newInsert  {
+//                if YPImagePickerConfiguration.shared.library.onlySquare {
                     self.v.assetViewContainer.execPhotoZoom(animated: false, forceFit: true)
-                }
+//                }
                 
                
-//            }
+            }
             self.updateCropInfo()
             if !isLowResIntermediaryImage {
                 self.v.hideLoader()
