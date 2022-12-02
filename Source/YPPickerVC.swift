@@ -205,6 +205,10 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
             return
         }
         
+        if let isMultipleSelectionEnabled = self.libraryVC?.isMultipleSelectionEnabled, isMultipleSelectionEnabled == true {
+            return
+        }
+        
         let vc = YPAlbumVC(albumsManager: albumsManager)
         let navVC = UINavigationController(rootViewController: vc)
         navVC.navigationBar.tintColor = .ypLabel
@@ -218,6 +222,9 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     }
     
     func setTitleViewWithTitle(aTitle: String) {
+        if let isMultipleSelectionEnabled = self.libraryVC?.isMultipleSelectionEnabled, isMultipleSelectionEnabled == true {
+            return
+        }
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
         
@@ -393,6 +400,7 @@ extension YPPickerVC: YPLibraryViewDelegate {
         v.header.bottomConstraint?.constant = enabled ? offset : 0
         v.layoutIfNeeded()
         updateUI()
+        navigationItem.titleView?.isHidden = enabled
     }
     
     public func libraryViewHaveNoItems() {
