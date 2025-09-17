@@ -5,7 +5,7 @@ use_frameworks!
 target 'Example' do
 
   # Pods for YPImagePickerExample
-  pod 'SteviaLayout', '= 5.1.2'
+  pod 'SteviaLayout', '= 6.2.0'
   pod 'PryntTrimmerView', '= 4.0.2'
 
 end
